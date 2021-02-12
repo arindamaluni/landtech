@@ -19,6 +19,7 @@ fs.readFileSync("./data/land_ownership.csv", "utf8")
     propStore.addParcelForCompany(companyId)
   }); 
 
-propStore.printAll();
-console.log(propStore.getCompanyDetailsFormRoot('C949357294459'))
+// propStore.printAll();
+console.log(propStore.getCompanyDetailsFormRoot('CR866406850481'))
+console.log(propStore.expandTree('C949357294459'))
 

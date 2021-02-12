@@ -41,11 +41,12 @@ class PropStore {
     let expansionPath = [];
     let company = this.storeMap.get(companyId);
     if (company == null) return '| - null';
-    // expansionPath.unshift(company)
+    // Trace the path to the root
     while(company.parent) {
       expansionPath.unshift(company.parent)
       company = company.parent;
     }
+    // Recurse and get trace
     function print(index, path, node) {
       let returnString = ('| '.repeat(index) + '- ' + node.toString() + '\n')
       if (path[index] === node) {
@@ -55,7 +56,24 @@ class PropStore {
       } 
       return returnString;
     }
-    return print (0, expansionPath, expansionPath[0]);
+    // If the parent node is passed 
+    // no traversing of children required 
+    // so expansionPath remains empty
+    return print (0, expansionPath, 
+      (expansionPath.length === 0)? company: expansionPath[0]);
+  }
+
+  expandTree(companyId) {
+    let  company = this.storeMap.get(companyId);
+    if (company == null) return '| - null';
+    function print(index, node) {
+      let returnString = ('| '.repeat(index) + '- ' + node.toString() + '\n')
+        for (let child of node.children) {
+          returnString += print(index+1, child)
+        }
+      return returnString;
+    }
+    return print (0, company);
   }
 }
 

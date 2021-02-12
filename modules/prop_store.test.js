@@ -1,5 +1,4 @@
 const PropStore = require('./prop_store')
-const Company = require('./company')
 
 describe('Property store module test suit - Integration with Company Module', () => {
   let store = null;
@@ -67,6 +66,33 @@ describe('Property store module test suit - Integration with Company Module', ()
     expect(trace.indexOf('parent')).not.toEqual(-1);
     expect(trace.indexOf('L10')).not.toEqual(-1);
     expect(trace.indexOf('L11')).not.toEqual(-1);
+  });
+
+  /**
+   * Expected output structure 
+  - parent; Parent Company; owner of 2 land parcels
+  | - L10; Child Company:L10; owner of 1 land parcel
+  | | - L20; Child Company:L20; owner of 0 land parcel
+  | | | - L30; Child Company:L30; owner of 0 land parcel
+  | - L11; Child Company:L11; owner of 1 land parcel
+  | | - L21; Child Company:L21; owner of 0 land parcel
+  | | | - L31; Child Company:L31; owner of 0 land parcel 
+  */
+  it('Should be possible to expand a section of the tree to all the child nodes with full hierarchy', () => {
+    store.addCompany('L30', `Child Company:L30`, 'L20')
+    store.addCompany('L31', `Child Company:L31`, 'L21')
+    let trace = store.expandTree('parent');
+    
+    expect(trace.trim().split('\n').length).toEqual(7)
+    
+    expect(trace.indexOf('parent')).not.toEqual(-1);
+    expect(trace.indexOf('L10')).not.toEqual(-1);
+    expect(trace.indexOf('L11')).not.toEqual(-1);    
+    expect(trace.indexOf('L20')).not.toEqual(-1);
+    expect(trace.indexOf('L21')).not.toEqual(-1);
+    expect(trace.indexOf('L30')).not.toEqual(-1);
+    expect(trace.indexOf('L31')).not.toEqual(-1); 
+  
   });
 
 });
