@@ -5,7 +5,7 @@ class PropStore {
   addCompany(id, name, parentId) {
     let parent = this.storeMap.get(parentId);
 
-    if (parent == null && parentId.trim() !== '') {
+    if (parent == null && (parentId !== null && parentId.trim() !== '')) {
       this.storeMap.set(parentId, new Company(parentId));
     } 
 
@@ -13,24 +13,31 @@ class PropStore {
     if (childCompany == null) {
       childCompany = new Company(id, parent, name); 
       this.storeMap.set(id, childCompany)
-    } else {parentId
+    } else {
       childCompany.setName(name);
       childCompany.setParent(parent);
     }
-    parentId.trim() !== '' && this.storeMap.get(parentId).addChildCompany(childCompany)
+    if (parentId !== null && parentId.trim() !== '' ) {
+        this.storeMap.get(parentId).addChildCompany(childCompany)
+    }
+    return childCompany;
+  }
+
+  getCompany(id) {
+    return this.storeMap.get(id);
   }
 
   addParcelForCompany(companyId) {
     let company = this.storeMap.get(companyId);
-    if (company == null) {console.log('Not found:' + companyId)}
-    else company.addParcel(1);
+    if (company != null) 
+      company.addParcel(1);
   }
 
   printAll() {
     this.storeMap.forEach((entry, key)=> console.log(key, entry.toString()));
   }
 
-  fromRoot(companyId) { 
+  getCompanyDetailsFormRoot(companyId) { 
     let expansionPath = [];
     let company = this.storeMap.get(companyId);
     if (company == null) return '| - null';
@@ -40,14 +47,15 @@ class PropStore {
       company = company.parent;
     }
     function print(index, path, node) {
-      console.log('| '.repeat(index) + '- ' + node.toString())
+      let returnString = ('| '.repeat(index) + '- ' + node.toString() + '\n')
       if (path[index] === node) {
         for (let child of node.children) {
-          print(index+1, path, child)
+          returnString += print(index+1, path, child)
         }
-      }
+      } 
+      return returnString;
     }
-    print (0, expansionPath, expansionPath[0]);
+    return print (0, expansionPath, expansionPath[0]);
   }
 }
 

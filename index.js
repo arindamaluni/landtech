@@ -20,5 +20,5 @@ fs.readFileSync("./data/land_ownership.csv", "utf8")
   }); 
 
 propStore.printAll();
-propStore.fromRoot('C949357294459')
+console.log(propStore.getCompanyDetailsFormRoot('C949357294459'))
 
