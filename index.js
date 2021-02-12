@@ -1,9 +1,9 @@
-const PropStore = require('./prop_store')
+const PropStore = require('./modules/prop_store')
 
 const propStore = new PropStore();
 const fs = require("fs");
 
-fs.readFileSync("./company_relations.csv", "utf8")
+fs.readFileSync("./data/company_relations.csv", "utf8")
   .split("\n")
   .slice(1) // header row
   .forEach((line) => {
@@ -11,7 +11,7 @@ fs.readFileSync("./company_relations.csv", "utf8")
     propStore.addCompany(id, name, parentId);
   });
 
-fs.readFileSync("./land_ownership.csv", "utf8")
+fs.readFileSync("./data/land_ownership.csv", "utf8")
   .split("\n")
   .slice(1) // header row
   .forEach((line) => {

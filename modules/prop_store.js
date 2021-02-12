@@ -23,7 +23,7 @@ class PropStore {
   addParcelForCompany(companyId) {
     let company = this.storeMap.get(companyId);
     if (company == null) {console.log('Not found:' + companyId)}
-    else company.addParcel();
+    else company.addParcel(1);
   }
 
   printAll() {

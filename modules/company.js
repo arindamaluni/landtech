@@ -1,16 +1,20 @@
 
 class Company {
   #totalParcels = -1;
-  constructor(id, parent=null, name='') {
+  constructor(id, parent=null, name='', parcel=0) {
     this.id = id;
     this.parent = parent;
     this.name = name;
     this.children = []; 
-    this.parcel=0;
+    this.parcel=parcel;
   }
   setParent(_parent) { this.parent = _parent; }
   setName(_name) { this.name = _name; }
-  addParcel() { this.parcel++; }
+  addParcel(noOfParcel) { 
+    this.parcel+=noOfParcel; 
+    this.#totalParcels=-1
+  }
+  getOwnParcel() { return this.parcel }
   getParcelCount() {
     if (this.#totalParcels<0) {
       let totalCount = this.parcel;
@@ -26,6 +30,7 @@ class Company {
   addChildCompany(child) {
     if (!this.children.includes(child)) {
       this.children.push(child);
+      this.#totalParcels = -1;
     }
   }
   getChildren() {
