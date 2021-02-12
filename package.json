@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "landtech": "node index.js ",
-    "test": "jest --config ./jest-config.json",
+    "test": "jest --config ./jest-config.json --coverage",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
