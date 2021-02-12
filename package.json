@@ -1,0 +1,12 @@
+{
+  "name": "landtech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "landtech": "node index.js ",
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
