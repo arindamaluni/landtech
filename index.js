@@ -20,6 +20,6 @@ fs.readFileSync("./data/land_ownership.csv", "utf8")
   }); 
 
 // propStore.printAll();
-console.log(propStore.getCompanyDetailsFormRoot('CR866406850481'))
+console.log(propStore.traceFormRoot('CR866406850481'))
 console.log(propStore.expandTree('C949357294459'))
 

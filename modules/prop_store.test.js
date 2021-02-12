@@ -51,7 +51,7 @@ describe('Property store module test suit - Integration with Company Module', ()
       | | - L21; Child Company:L21; owner of 0 land parcel
    */
   it('Should be possible to trace the root of a company given an id with child details only for companies in trace', () => {
-    let trace = store.getCompanyDetailsFormRoot('L20');
+    let trace = store.traceFormRoot('L20');
     expect(trace.trim().split('\n').length).toEqual(4)
     expect(trace.indexOf('L21')).toEqual(-1);
     expect(trace.indexOf('L20')).not.toEqual(-1);
@@ -59,7 +59,7 @@ describe('Property store module test suit - Integration with Company Module', ()
     expect(trace.indexOf('L10')).not.toEqual(-1);
     expect(trace.indexOf('L11')).not.toEqual(-1);
 
-    trace = store.getCompanyDetailsFormRoot('L21');
+    trace = store.traceFormRoot('L21');
     expect(trace.trim().split('\n').length).toEqual(4)
     expect(trace.indexOf('L20')).toEqual(-1);
     expect(trace.indexOf('L21')).not.toEqual(-1);

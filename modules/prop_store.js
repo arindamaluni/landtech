@@ -37,7 +37,7 @@ class PropStore {
     this.storeMap.forEach((entry, key)=> console.log(key, entry.toString()));
   }
 
-  getCompanyDetailsFormRoot(companyId) { 
+  traceFormRoot(companyId) { 
     let expansionPath = [];
     let company = this.storeMap.get(companyId);
     if (company == null) return '| - null';
